@@ -1,4 +1,5 @@
 
 # BEGIN chezmoi managed
 **/.claude/settings.local.json
+**/docs/superpowers/
 # END chezmoi managed

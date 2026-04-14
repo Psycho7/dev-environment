@@ -2,8 +2,8 @@
 	path = ~/.config/git/aliases.gitconfig
 
 [user]
-	name = User
-	email = user@example.com
+	name = Chujie Zeng
+	email = chujie.zeng@gmail.com
 
 [credential]
 	helper = /usr/local/bin/git-credential-manager
