@@ -1,0 +1,42 @@
+[alias]
+    # status & log
+    st = status
+    l = log
+    ll = log \
+        --graph \
+        --topo-order \
+        --decorate \
+        --all \
+        --boundary \
+        --date=relative \
+        --abbrev-commit \
+        --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(cyan)[%aN]%C(brightmagenta)<%ae> %C(green)(%ad)%Creset'
+
+    # fetch
+    f = fetch --all --verbose
+
+    # add
+    a = add
+    aa = add --all
+
+    # commit
+    c = commit
+    ca = commit --all
+    cm = commit --message
+    cam = commit --all --message
+    amend = commit -a --amend --no-edit
+    now = commit --amend --date=now --no-edit
+
+    # checkout
+    co = checkout
+    cob = checkout -b
+
+    # submodule
+    sm = submodule
+    smu = submodule update --init --recursive
+
+    # assume-unchanged
+    hide = update-index --assume-unchanged
+    hidden = ! git ls-files -v | rg '^h'
+    unhide = update-index --no-assume-unchanged
+    unhide-all = update-index --really-refresh

@@ -1,0 +1,61 @@
+{
+  "env": {
+    "DISABLE_AUTOUPDATER": "1"
+  },
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bunx -y ccstatusline@latest",
+    "padding": 0
+  },
+  "permissions": {
+    "allow": [
+      "Bash(chezmoi diff:*)",
+      "Bash(chezmoi status:*)",
+      "Bash(dotnet add:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet clean:*)",
+      "Bash(dotnet format:*)",
+      "Bash(dotnet list:*)",
+      "Bash(dotnet new:*)",
+      "Bash(dotnet pack:*)",
+      "Bash(dotnet publish:*)",
+      "Bash(dotnet remove:*)",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet run:*)",
+      "Bash(dotnet test:*)",
+      "Bash(dotnet tool:*)",
+      "Bash(dotnet watch:*)",
+      "Bash(echo:*)",
+      "Bash(fd:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git diff:*)",
+      "Bash(git fetch:*)",
+      "Bash(git log:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(git remote:*)",
+      "Bash(git show-ref:*)",
+      "Bash(git stash list:*)",
+      "Bash(git status:*)",
+      "Bash(jq:*)",
+      "Bash(ls:*)",
+      "Bash(rg:*)",
+      "Bash(wc:*)",
+      "Bash(which:*)",
+      "WebSearch"
+    ],
+    "ask": [
+      "Bash(git clean:*)",
+      "Bash(git push:*)",
+      "Bash(git reset:*)",
+      "Bash(rm:*)"
+    ],
+    "deny": [
+      "Bash(sudo:*)"
+    ]
+  }
+}
