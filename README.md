@@ -1,6 +1,6 @@
 # dev-environment
 
-Rendered output of my [dotfiles](https://github.com/Psycho7/dotfiles) — auto-generated on every push to `main`.
+Rendered output of my [dotfiles](https://github.com/Psycho7/dotfiles) — CI auto-generated.
 
 ## What's here
 
