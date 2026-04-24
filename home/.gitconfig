@@ -8,5 +8,18 @@
 [credential]
 	helper = /usr/local/bin/git-credential-manager
 
+[core]
+	pager = delta
+
+[interactive]
+	diffFilter = delta --color-only
+
+[delta]
+	navigate = true
+	line-numbers = true
+
+[merge]
+	conflictstyle = zdiff3
+
 [include]
 	path = ~/.config/git/local.gitconfig
