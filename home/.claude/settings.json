@@ -58,5 +58,41 @@
     "deny": [
       "Bash(sudo:*)"
     ]
+  },
+  "enabledPlugins": {
+    "typescript-lsp@claude-plugins-official": false,
+    "pyright-lsp@claude-plugins-official": false,
+    "csharp-lsp@claude-plugins-official": false,
+    "rust-analyzer-lsp@claude-plugins-official": false,
+    "clangd-lsp@claude-plugins-official": false,
+    "skill-creator@claude-plugins-official": false,
+    "plugin-dev@claude-plugins-official": false,
+    "feature-dev@claude-plugins-official": false,
+    "codex@openai-codex": false,
+    "claude-md-management@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true,
+    "obsidian@obsidian-skills": true,
+    "claude-code-setup@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
+    },
+    "chezmoi-cookbook": {
+      "source": {
+        "source": "github",
+        "repo": "Psycho7/chezmoi-cookbook"
+      }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    }
   }
 }
