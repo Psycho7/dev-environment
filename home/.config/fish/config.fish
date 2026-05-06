@@ -5,6 +5,8 @@ if test -d /opt/homebrew
     /opt/homebrew/bin/brew shellenv | source
 end
 
+set -q COLORTERM; or set -gx COLORTERM truecolor
+
 fish_add_path $HOME/.local/bin
 
 starship init fish | source
