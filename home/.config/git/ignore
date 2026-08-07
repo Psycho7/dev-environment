@@ -1,5 +1,5 @@
-
 # BEGIN chezmoi managed
 **/.claude/settings.local.json
+**/.claude/.cc-writes/
 **/docs/superpowers/
 # END chezmoi managed
