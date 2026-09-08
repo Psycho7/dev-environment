@@ -6,7 +6,7 @@ User-wide guideline for all repositories. Project-level CLAUDE.md and user promp
 - **No filler transitions.** Logical connectors are fine ("because", "so", "however", "if"). Ban padding transitions: "Additionally", "Moreover", "Furthermore", "That said", "With that in mind", "To that end".
 
 ## Humanize Before Delivering
-Before delivering human-facing prose (docs, writeups, code comments), run the humanizer skill; dispatch the tomorin agent instead when it is multi-paragraph or a whole file. Delivery only - skip during iteration and for chat responses.
+Before delivering human-facing prose (docs, writeups), run the humanizer skill in embedded mode (return only the final text); dispatch the tomorin agent instead when it is longer than a paragraph or a whole file. Delivery only - skip during iteration, for chat responses, and for code comments (coding-guidelines covers those). Commands, config blocks, and code fences stay byte-identical.
 
 ## CRITICAL - Principles
 ### 1. Think Before Coding
@@ -19,6 +19,8 @@ Before implementing:
 - If a simpler approach exists, say so. Push back when warranted.
 - If uncertain, you MUST use tool AskUserQuestion for clarification.
 - If you think anything beyond what was asked is absolutely needed, propose it and ask for approval.
+- Before asserting how a tool, API, or product behaves, verify against current docs or source and cite it; otherwise say "unverified".
+- Guides or scripts with copy-paste commands get an adversarial audit pass (paths, prerequisites, ordering) before delivery.
 
 ### 2. Simplicity First
 
@@ -79,11 +81,11 @@ Skip simplification entirely for throwaway, exploratory, or prototype code.
 - Find all affected sites before asking a scoping question. Ask once with the real scope.
 - Verify paths, files, and scope with a real read/grep before launching a workflow or fan-out. Never size work off unverified bash output, invented filenames, or stale summaries.
 - Skip a workflow when doing it inline is faster.
+- Superpowers process skills (brainstorming, writing-plans, executing-plans, subagent-driven-development, test-driven-development) are opt-in: use them only when the user names one. Never write or commit files under `docs/superpowers/` or `.superpowers/`.
+- Do not run commands that change the machine or profile (`chezmoi apply`, installs, service restarts, config applies) unless explicitly asked. Editing source is not a request to apply it.
 
-## Code Comments
-Applies to all in-source text that is not code: line/block comments, docstrings, TODO/FIXME/NOTE markers, license/file headers.
-- Use ASCII characters only unless explicitly asked otherwise (no em-dashes, smart quotes, Unicode arrows, non-ASCII symbols).
-- Do not mention or refer to external documentation, design docs, ADRs, tickets, wikis, or other Markdown files.
+## Coding Guidelines
+Before writing or refactoring code in any language, load the `coding-guidelines` skill. Language-specific skills (e.g. `csharp-style`) build on it.
 
 ## Documentation
 - The user is an experienced developer; skip obvious basics in explanations and docs.
@@ -103,9 +105,13 @@ Applies to all in-source text that is not code: line/block comments, docstrings,
 ## Git
 - Do not commit unless explicitly asked.
 - Avoid committing untracked/generated/binary artifacts. Keep commits scoped and descriptive.
+- Stage explicit paths; never `git add -A` or `git add .`.
+- Before committing, confirm `git rev-parse --show-toplevel` and the branch, and run `git status`; list pre-existing uncommitted changes instead of sweeping them in.
+- Never discard changes (`git checkout --`, `git restore`, `git stash`) without showing the diff that would be lost.
+- Never merge PRs (`gh pr merge`, `git merge`). Open the PR, confirm CI, hand over the URL.
 - Use ASCII characters only in commit messages unless explicitly asked otherwise.
 - Do not mention or refer to external documentation, design docs, ADRs, tickets, wikis, or other Markdown files in commit messages.
-- Commit message style: imperative mood. Single line for small changes (e.g., `Fix null check in parser`). For large commits, a brief summary line followed by bullet details:
+- Commit message style: imperative mood. Subject line capitalized, no trailing period, 50 characters target and 72 hard limit. Single line for small changes (e.g., `Fix null check in parser`). For large commits, a brief summary line followed by bullet details that explain what and why, not how; wrap at 72:
 
 ```
 Refactor auth middleware
@@ -120,7 +126,11 @@ Refactor auth middleware
 - For complex exploration, split the task into smaller pieces and spawn up to 3 subagents in parallel.
 - Only re-read files you will edit or where the summary is ambiguous.
 
-## Subagent Model Selection
+## Subagents
+- Delegate implementation to `rikki` and gate it with `sakichan` only when the user asks for it or the task has stated acceptance criteria and touches three or more files; otherwise work inline. An implementer's report is a set of claims until verified.
+- When a skill calls for an implementer or reviewer subagent, dispatch `rikki` and `sakichan` in those roles (a skill the user named counts as the user asking).
+- Every dispatch states the absolute working directory and branch. A rikki dispatch also states the acceptance criteria, whether to commit, and the verification command. A sakichan dispatch states the criteria, the base commit, and rikki's report.
+- Review and audit subagents run at high effort.
 - Default to Opus for subagents and never fall back to Sonnet. If a task seems easy enough for Sonnet, run Opus at low or medium reasoning effort instead.
 - Reserve Haiku for trivial or simple tasks where raw speed matters most.
 

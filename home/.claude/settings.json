@@ -5,7 +5,8 @@
   },
   "attribution": {
     "commit": "",
-    "pr": ""
+    "pr": "",
+    "sessionUrl": false
   },
   "permissions": {
     "allow": [
@@ -46,12 +47,6 @@
     ],
     "deny": [
       "Bash(sudo:*)"
-    ],
-    "ask": [
-      "Bash(git clean:*)",
-      "Bash(git push:*)",
-      "Bash(git reset:*)",
-      "Bash(rm:*)"
     ]
   },
   "statusLine": {
