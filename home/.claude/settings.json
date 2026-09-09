@@ -49,6 +49,23 @@
       "Bash(sudo:*)"
     ]
   },
+  "hooks": {
+    "SubagentStart": [
+      {
+        "matcher": "rikki|sakichan",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/subagent-context.fish\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "worktree": {
+    "baseRef": "head"
+  },
   "statusLine": {
     "type": "command",
     "command": "bunx -y ccstatusline@latest",
@@ -95,5 +112,6 @@
       }
     }
   },
-  "showClearContextOnPlanAccept": true
+  "showClearContextOnPlanAccept": true,
+  "askUserQuestionTimeout": "60s"
 }
