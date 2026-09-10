@@ -2,7 +2,7 @@
 set -e
 
 echo "Installing packages on macOS..."
-brew install fish ripgrep fd jq starship zoxide bat btop yazi fzf gh git-delta gnupg node
+brew install fish ripgrep fd jq yq starship zoxide bat btop yazi fzf gh git-delta gnupg node
 brew install oven-sh/bun/bun
 brew install --cask font-fira-code-nerd-font
 brew install --cask ghostty

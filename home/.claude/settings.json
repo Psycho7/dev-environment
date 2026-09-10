@@ -50,13 +50,58 @@
     ]
   },
   "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/mygo-dispatch-guard.fish\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
     "SubagentStart": [
       {
         "matcher": "rikki|sakichan",
         "hooks": [
           {
             "type": "command",
-            "command": "\"$HOME/.claude/hooks/subagent-context.fish\"",
+            "command": "\"$HOME/.claude/hooks/mygo-subagent-context.fish\"",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "rikki",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/mygo-subagent-resumed.fish\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "matcher": "rikki|sakichan",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/mygo-subagent-done.fish\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME/.claude/hooks/mygo-verification-gate.fish\"",
             "timeout": 10
           }
         ]
@@ -74,7 +119,6 @@
   "enabledPlugins": {
     "claude-md-management@claude-plugins-official": true,
     "code-simplifier@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true,
     "obsidian@obsidian-skills": true,
     "claude-code-setup@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": false,

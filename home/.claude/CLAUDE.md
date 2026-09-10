@@ -126,20 +126,15 @@ Refactor auth middleware
 - Only re-read files you will edit or where the summary is ambiguous.
 
 ## Subagents
-- Delegate implementation to `rikki` and gate it with `sakichan` only when the user asks for it or the task has stated acceptance criteria and touches three or more files; otherwise work inline. An implementer's report is a set of claims until verified.
-- When a skill calls for an implementer or reviewer subagent, dispatch `rikki` and `sakichan` in those roles (a skill the user named counts as the user asking).
-- Every dispatch states the absolute working directory and branch. A rikki dispatch also states the acceptance criteria, whether to commit, and the verification command. A sakichan dispatch states the criteria, the base commit, and rikki's report.
-- Multi-dispatch plans share one brief file in the scratchpad; each dispatch gets the brief path, its own task and criteria, and a report path. sakichan gets the same paths, not a restated report.
-- Name every dispatch and run it in the background. On NEEDS_CONTEXT or failed criteria, resolve the gap and resume the same agent with SendMessage. Routine gaps are your call; ask the user only when readings differ materially.
-- At most 3 rikkis in flight, disjoint files, one commit each. Use `isolation: "worktree"` only when files must overlap; it branches from committed HEAD, so commit the base first, send sakichan to the reported worktree path, and integrate the branch yourself.
-- Verify each rikki as it finishes; run the full verification once per plan.
-- Resume once on NEEDS_CONTEXT; a second means fix the brief and re-dispatch. An isolated rikki that returns with no changes is re-dispatched, since its worktree is gone.
-- Review and audit subagents run at high effort.
-- Default to Opus for subagents and never fall back to Sonnet. If a task seems easy enough for Sonnet, run Opus at low or medium reasoning effort instead.
-- Reserve Haiku for trivial or simple tasks where raw speed matters most.
+- `rikki` implements, `sakichan` verifies. The `mygo` skill is required to dispatch them; use it for work with acceptance criteria across several files, or when the user asks for it.
+- Smaller features go through `/feature-dev`.
+- Mechanical, token-heavy work with no design judgment (renames, reference sweeps, bulk fixture edits) goes to a subagent with exact instructions and a verification command, not inline.
+- Subagents run Opus; Review and audit subagents run at high effort.
+- Haiku only for mechanical work where speed matters.
 
 ## Tools
-- Use `jq` for JSON processing
+- `jq` for JSON processing
+- `yq` for YAML and Markdown front matter
 - File finding: use `fd` (not `find`)
 - Content search: use `rg` (not `grep`)
 - Prefer built-in tools over Bash where available:
