@@ -1,7 +1,10 @@
 {
+  "syncClaudeAiSkills": false,
+  "syncClaudeAiPlugins": false,
   "skillListingBudgetFraction": 0.03,
   "env": {
-    "DISABLE_AUTOUPDATER": "1"
+    "DISABLE_AUTOUPDATER": "1",
+    "CLAUDE_CODE_THRIFTY_SONIC": "0"
   },
   "attribution": {
     "commit": "",
@@ -48,6 +51,10 @@
     "deny": [
       "Bash(sudo:*)"
     ]
+  },
+  "skillOverrides": {
+    "claude-api": "name-only",
+    "claude-in-chrome": "name-only"
   },
   "hooks": {
     "PreToolUse": [
